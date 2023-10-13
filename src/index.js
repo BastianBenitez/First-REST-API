@@ -9,4 +9,4 @@ app.listen(process.env.PORT || 3000, () =>{
     console.log('Server ready');
 })
 
-app.use(require('./routes/respuesta.js'))
+app.use('/api/', require('./routes/respuesta.js'))
