@@ -2,7 +2,7 @@ const express = require('express');
 const morgan = require('morgan');
 const cors = require('cors');
 const app = express();
-const { createConnection } = require('./db.js'); // Importa la función de conexión
+const { createConnection } = require('./db.js');
 
 // Middleware
 app.use(morgan('dev'));
