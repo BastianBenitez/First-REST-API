@@ -1,11 +1,13 @@
 const express = require('express');
 const morgan = require('morgan');
+const cors = require('cors');
 const app = express();
 const { createConnection } = require('./db.js'); // Importa la función de conexión
 
 // Middleware
 app.use(morgan('dev'));
 app.use(express.json());
+app.use(cors());
 
 // Conecta a la base de datos
 const Connection = createConnection();
