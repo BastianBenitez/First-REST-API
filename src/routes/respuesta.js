@@ -38,7 +38,6 @@ router.get('/teams', (req, resp) => {
 
             const result = Object.values(groupedData);
             result.sort((a, b) => b.PointsT - a.PointsT);
-            console.log(result);
             resp.json(result);
         }
     });
