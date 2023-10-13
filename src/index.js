@@ -1,12 +1,28 @@
-const express = require('express')
-const morgan = require('morgan')
-const app = express()
+const express = require('express');
+const morgan = require('morgan');
+const app = express();
+const { createConnection } = require('./db.js'); // Importa la función de conexión
 
-app.set(morgan('dev'))
-app.set(express.json())
+// Middleware
+app.use(morgan('dev'));
+app.use(express.json());
 
-app.listen(process.env.PORT || 3000, () =>{
-    console.log('Server ready');
-})
+// Conecta a la base de datos
+const Connection = createConnection();
+Connection.connect((err) => {
+    if (err) {
+        console.error('Error al conectar a la base de datos:', err);
+        process.exit(1); // Sale del proceso en caso de error de conexión
+    } else {
+        console.log('Conexión exitosa a la base de datos');
+    }
+});
 
-app.use('/api/', require('./routes/respuesta.js'))
+// Iniciar el servidor
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+    console.log(`Servidor en funcionamiento en el puerto ${PORT}`);
+});
+
+// Rutas
+app.use('/api/', require('./routes/respuesta.js'));
